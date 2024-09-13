@@ -1,0 +1,53 @@
+.converter {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.conversion {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.conversion div:not(:last-child) {
+	margin-bottom: 1rem;
+}
+
+.change button {
+	width: 70%;
+	height: 70%;
+	background-color: #007bff;
+	border: none;
+	color: white;
+	padding: 1rem 2rem;
+	cursor: pointer;
+}
+
+.conversion div span {
+	font-size: 1.2rem;
+}
+
+.conversion input {
+	width: 100%;
+	padding: 0.5rem;
+	border: 1px solid #ccc;
+	outline: none;
+}
+
+.history {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.history span {
+	font-size: 1.4rem;
+}
+
+.history .frame {
+	height: 150px;
+	width: 300px;
+	background-color: lightgrey;
+	border-radius: 5px;
+}
