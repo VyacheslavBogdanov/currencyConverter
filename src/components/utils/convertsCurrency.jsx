@@ -1,3 +1,3 @@
-export const convertsCurrency = (value) => {
-	return value / 100;
+export const convertsCurrency = (valueInput, valueFrom, valueTo) => {
+	return (valueTo / valueFrom) * valueInput;
 };

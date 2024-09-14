@@ -7,10 +7,12 @@ export const Converter = () => {
 		conversionFrom: '',
 		conversionTo: '',
 	});
-	const [firstCurrency, setFirstCurrency] = useState('rub');
-	const [secondCurrency, setSecondCurrency] = useState('usd');
+	const [firstCurrency, setFirstCurrency] = useState('RUB');
+	const [secondCurrency, setSecondCurrency] = useState('USD');
 	const [currenciesCode, setСurrenciesCode] = useState([]);
-	const [exchangeRate, setExchangeRate] = useState([]);
+	// const [exchangeRate, setExchangeRate] = useState([]);
+	const [conversionRates, setConversionRates] = useState({});
+	// const [conversion, setConversion] = useState({});
 
 	const onChange = (event) => {
 		const { name, value } = event.target;
@@ -18,7 +20,11 @@ export const Converter = () => {
 		setData((prevState) => ({
 			...prevState,
 			[name]: value,
-			conversionTo: convertsCurrency(value),
+			conversionTo: convertsCurrency(
+				value,
+				conversionRates[firstCurrency],
+				conversionRates[secondCurrency],
+			),
 		}));
 	};
 
@@ -38,18 +44,22 @@ export const Converter = () => {
 		fetch('https://v6.exchangerate-api.com/v6/500eda8129cb286bbd60c0ad/latest/USD')
 			.then((response) => response.json())
 			.then((data) => {
-				const conversionRates = data.conversion_rates;
+				const rates = data.conversion_rates;
+				setConversionRates(rates);
 
-				Object.keys(conversionRates).forEach((currency) => {
-					setСurrenciesCode((prevCurrencies) => [...prevCurrencies, currency]);
-					setExchangeRate((prevState) => [
-						...prevState,
-						conversionRates[currency],
-					]);
+				Object.keys(rates).forEach((currency) => {
+					setСurrenciesCode((prevState) => [...prevState, currency]);
+					// setExchangeRate((prevState) => [
+					// 	...prevState,
+					// 	conversionRates[currency],
+					// ]);
+					// setConversion({ currency: conversionRates[currency] });
 				});
 			})
 			.catch((error) => console.error('Ошибка:', error));
 	}, []);
+
+	console.log('conversionRates', conversionRates);
 
 	return (
 		<>
