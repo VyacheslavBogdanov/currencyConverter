@@ -41,10 +41,11 @@ export const Converter = () => {
 		setSecondCurrency(firstCurrency);
 	};
 	useEffect(() => {
-		fetch('https://v6.exchangerate-api.com/v6/500eda8129cb286bbd60c0ad/latest/USD')
+		fetch('http://localhost:3005/conversion_rates')
 			.then((response) => response.json())
 			.then((data) => {
-				const rates = data.conversion_rates;
+				// const rates = data.conversion_rates; //Task
+				const rates = data; //TEST
 				setConversionRates(rates);
 
 				Object.keys(rates).forEach((currency) => {
