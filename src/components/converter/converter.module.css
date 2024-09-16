@@ -51,3 +51,12 @@
 	background-color: lightgrey;
 	border-radius: 5px;
 }
+
+.changeArrow {
+	width: 50px;
+	min-height: 50px;
+	background: url(./img/change.svg) no-repeat 50%;
+	background-size: 30px;
+	margin: 0 auto;
+	cursor: pointer;
+}
