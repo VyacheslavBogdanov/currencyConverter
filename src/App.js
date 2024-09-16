@@ -1,6 +1,8 @@
+import React, { useReducer } from 'react';
 import styles from './App.module.css';
-import { Converter } from './components/converter/converter';
 import { ConversionHistory } from './components/conversionHistory/conversionHistory';
+import { ConversionResult } from './components/conversionResult/conversionResult';
+import { Converter } from './components/converter/converter';
 
 const initialState = {
 	history: [],
@@ -15,7 +17,7 @@ const reducer = (state, effect) => {
 		case 'ERROR':
 			return { ...state, error: effect.error };
 		case 'HISTORY':
-			return { ...state, history: [effect.entry, ...state.history].slice(0, 5) };
+			return { ...state, history: [effect.history, ...state.history].slice(0, 5) };
 		default:
 			return state;
 	}
@@ -29,9 +31,7 @@ export const App = () => {
 			.then((response) => response.json())
 			.then((data) => {
 				const result = (data[to] / data[from]) * sum;
-
 				dispatch({ type: 'RESULT', result });
-
 				const history = {
 					date: new Date().toLocaleString(),
 					from,
@@ -50,8 +50,10 @@ export const App = () => {
 	};
 
 	return (
-		<div className={styles.App}>
-			<Converter />
+		<div className={styles.app}>
+			<Converter onConverting={makeConversion} />
+			<ConversionResult result={state.result} />
+			<ConversionHistory history={state.history} />
 		</div>
 	);
 };

@@ -8,7 +8,7 @@ export const ConversionHistory = ({ history }) => {
 			<ul>
 				{history.map((historyData, index) => (
 					<li key={index}>
-						{historyData.date} - {historyData.from} {historyData.amount} →{' '}
+						{historyData.date} - {historyData.from} {historyData.sum} →{' '}
 						{historyData.to} {historyData.result}
 					</li>
 				))}
