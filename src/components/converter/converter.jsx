@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import styles from './converter.module.css';
+import { ConversionResult } from '../conversionResult/conversionResult';
 
-export const Converter = ({ onConverting }) => {
+export const Converter = ({ onConverting, result }) => {
 	const [currencyFrom, setCurrencyFrom] = useState('USD');
 	const [currencyTo, setCurrencyTo] = useState('RUB');
 	const [sum, setSum] = useState(1);
 	const [currenciesCode, setСurrenciesCode] = useState([]);
 
 	useEffect(() => {
-		fetch('http://localhost:3007/conversion_rates')
+		fetch('http://localhost:3005/conversion_rates')
 			.then((response) => response.json())
 			.then((data) => setСurrenciesCode(Object.keys(data)));
 	}, []);
@@ -16,8 +17,8 @@ export const Converter = ({ onConverting }) => {
 	return (
 		<div className={styles.converter}>
 			<div className={styles.conversion}>
-				<h1>У меня есть</h1>
-				<div>
+				<div className={styles.title}>У меня есть</div>
+				<div className={styles.select}>
 					<select
 						value={currencyFrom}
 						onChange={(event) => setCurrencyFrom(event.target.value)}
@@ -29,7 +30,7 @@ export const Converter = ({ onConverting }) => {
 						))}
 					</select>
 				</div>
-				<div>
+				<div className={styles.amount}>
 					<input
 						type="number"
 						value={sum}
@@ -37,7 +38,7 @@ export const Converter = ({ onConverting }) => {
 					></input>
 				</div>
 			</div>
-			<div className={styles.change}>
+			<div className={styles.buttons}>
 				<div
 					className={styles.changeArrow}
 					onClick={() => {
@@ -45,10 +46,15 @@ export const Converter = ({ onConverting }) => {
 						setCurrencyTo(currencyFrom);
 					}}
 				></div>
+
+				<button onClick={() => onConverting(currencyFrom, currencyTo, sum)}>
+					Конвертировать
+				</button>
 			</div>
+
 			<div className={styles.conversion}>
-				<h1>Хочу приобрести</h1>
-				<div>
+				<div className={styles.title}>Хочу приобрести</div>
+				<div className={styles.select}>
 					<select
 						value={currencyTo}
 						onChange={(event) => setCurrencyTo(event.target.value)}
@@ -60,10 +66,8 @@ export const Converter = ({ onConverting }) => {
 						))}
 					</select>
 				</div>
+				<ConversionResult result={result} />
 			</div>
-			<button onClick={() => onConverting(currencyFrom, currencyTo, sum)}>
-				Конвертировать
-			</button>
 		</div>
 	);
 };

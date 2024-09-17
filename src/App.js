@@ -1,7 +1,6 @@
 import React, { useReducer } from 'react';
 import styles from './App.module.css';
 import { ConversionHistory } from './components/conversionHistory/conversionHistory';
-import { ConversionResult } from './components/conversionResult/conversionResult';
 import { Converter } from './components/converter/converter';
 
 const initialState = {
@@ -27,10 +26,10 @@ export const App = () => {
 	const [state, dispatch] = useReducer(reducer, initialState);
 
 	const makeConversion = (from, to, sum) => {
-		fetch(`http://localhost:3007/conversion_rates`)
+		fetch(`http://localhost:3005/conversion_rates`)
 			.then((response) => response.json())
 			.then((data) => {
-				const result = (data[to] / data[from]) * sum;
+				const result = ((data[to] / data[from]) * sum).toFixed(3);
 				dispatch({ type: 'RESULT', result });
 				const history = {
 					date: new Date().toLocaleString(),
@@ -44,15 +43,15 @@ export const App = () => {
 			.catch((error) => {
 				dispatch({
 					type: 'ERROR',
-					error: 'Ошибка сервера.',
+					error: 'Ошибка сервера. Не удалось получить данные курсов валют.',
 				});
 			});
 	};
 
 	return (
 		<div className={styles.app}>
-			<Converter onConverting={makeConversion} />
-			<ConversionResult result={state.result} />
+			<Converter onConverting={makeConversion} result={state.result} />
+			{state.error && <div className={styles.error}>{state.error}</div>}
 			<ConversionHistory history={state.history} />
 		</div>
 	);

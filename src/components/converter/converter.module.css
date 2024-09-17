@@ -1,62 +1,94 @@
 .converter {
 	display: flex;
 	justify-content: center;
-	align-items: center;
+	flex-wrap: nowrap;
+	padding: 0px;
+	background-color: #dfeae9;
+	border: none;
+	border-radius: 4px;
+	padding: 0px;
 }
 
 .conversion {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	margin: 0px;
+	padding: 15px;
+	min-width: 200px;
 }
 
-.conversion div:not(:last-child) {
-	margin-bottom: 1rem;
-}
-
-.change button {
-	width: 70%;
-	height: 70%;
-	background-color: #007bff;
-	border: none;
-	color: white;
-	padding: 1rem 2rem;
-	cursor: pointer;
-}
-
-.conversion div span {
-	font-size: 1.2rem;
-}
-
-.conversion input {
-	width: 100%;
-	padding: 0.5rem;
-	border: 1px solid #ccc;
-	outline: none;
-}
-
-.history {
-	display: flex;
-	flex-direction: column;
+.buttons {
+	display: grid;
+	justify-content: normal;
 	align-items: center;
-}
-
-.history span {
-	font-size: 1.4rem;
-}
-
-.history .frame {
 	height: 150px;
-	width: 300px;
-	background-color: lightgrey;
-	border-radius: 5px;
 }
 
 .changeArrow {
 	width: 50px;
 	min-height: 50px;
 	background: url(../img/change.svg) no-repeat 50%;
-	background-size: 30px;
-	margin: 0 auto;
+	background-size: 35px;
+	margin: 30px auto;
 	cursor: pointer;
+}
+
+.changeArrow:hover {
+	opacity: 0.6;
+}
+
+.title {
+	font-size: 15px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.select select {
+	margin-bottom: 20px;
+	width: 200px;
+	padding: 10px;
+	border: none;
+	border-radius: 4px;
+	background-color: rgb(178, 203, 178);
+	font-size: 22px;
+	appearance: auto;
+	cursor: pointer;
+	position: relative;
+}
+
+.select select:hover {
+	opacity: 0.6;
+}
+
+.amount input {
+	margin-bottom: 75px;
+	width: 100%;
+	height: 46px;
+	font-size: 30px;
+	margin-bottom: 30px;
+	outline: 0;
+	border: none;
+	font-family: GraphikCy-Semibold, 'Helvetica CY', Arial, sans-serif;
+	border-radius: 4px;
+}
+
+.buttons button {
+	padding: 5px;
+	height: 46px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	background-color: rgb(178, 203, 178);
+	font-size: 15px;
+}
+
+.buttons button:hover {
+	opacity: 0.6;
+}
+
+@media (max-width: 768px) {
+	.converter {
+		max-width: 100%;
+	}
 }

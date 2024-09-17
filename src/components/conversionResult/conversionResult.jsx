@@ -7,11 +7,7 @@ export const ConversionResult = ({ result }) => {
 			{result !== null ? (
 				<input type="number" value={result} readOnly></input>
 			) : (
-				<input
-					type="number"
-					placeholder="Введите данные для конвертации"
-					readOnly
-				></input>
+				<input type="number" readOnly></input>
 			)}
 		</div>
 	);
