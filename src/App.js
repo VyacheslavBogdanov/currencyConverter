@@ -26,10 +26,13 @@ export const App = () => {
 	const [state, dispatch] = useReducer(reducer, initialState);
 
 	const makeConversion = (from, to, sum) => {
-		fetch(`http://localhost:3005/conversion_rates`)
+		fetch(`https://v6.exchangerate-api.com/v6/500eda8129cb286bbd60c0ad/latest/USD`)
 			.then((response) => response.json())
 			.then((data) => {
-				const result = ((data[to] / data[from]) * sum).toFixed(3);
+				const result = (
+					(data.conversion_rates[to] / data.conversion_rates[from]) *
+					sum
+				).toFixed(3);
 				dispatch({ type: 'RESULT', result });
 				const history = {
 					date: new Date().toLocaleString(),

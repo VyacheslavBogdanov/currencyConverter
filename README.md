@@ -1,3 +1,24 @@
+# Установка и запуск React проекта
+
+1.Склонируйте репозиторий:
+git clone https://github.com/VyacheslavBogdanov/currencyConverter.git
+
+2.Перейдите в папку проекта
+cd currencyConverter
+
+3.Установите зависимости(убедитесь что у вас установлен Node.js):
+npm i
+
+4.Запустите проект:
+npm start
+
+5.Данные курсов валют и коды валют взяты с ExchangeRate API в режиме реального времени. Для тестирования данных курсов валют можно использовать тестовый json-server по адресу src/components/utils/testDB.json, для подключения к тестовому серверу:
+-в териминале установите json-server: npm i json-server
+-запустите тестовый сервер с адресом порта 3005: npx json-server src/components/utils/testDB.json --port 3005
+-откройте тестовый сервер по адресу http://localhost:3005/conversion_rates и подключите данный url в компонентах App.js и converter.jsx вместо API и замените data.conversion_rates на data.
+
+6.Для вывода ошибки при проблемах с API, необходимо сломать ссылку API в коде проекта
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

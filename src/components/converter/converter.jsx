@@ -5,13 +5,13 @@ import { ConversionResult } from '../conversionResult/conversionResult';
 export const Converter = ({ onConverting, result }) => {
 	const [currencyFrom, setCurrencyFrom] = useState('USD');
 	const [currencyTo, setCurrencyTo] = useState('RUB');
-	const [sum, setSum] = useState(1);
+	const [sum, setSum] = useState(100);
 	const [currenciesCode, setСurrenciesCode] = useState([]);
 
 	useEffect(() => {
-		fetch('http://localhost:3005/conversion_rates')
+		fetch('https://v6.exchangerate-api.com/v6/500eda8129cb286bbd60c0ad/latest/USD')
 			.then((response) => response.json())
-			.then((data) => setСurrenciesCode(Object.keys(data)));
+			.then((data) => setСurrenciesCode(Object.keys(data.conversion_rates)));
 	}, []);
 
 	return (
