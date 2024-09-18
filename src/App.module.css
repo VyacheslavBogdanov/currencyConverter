@@ -1,6 +1,6 @@
 .app {
 	text-align: center;
-	padding: 30px;
+	padding: 10px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -9,6 +9,7 @@
 
 .error {
 	color: red;
+	font-weight: bold;
 }
 
 @media (max-width: 768px) {
