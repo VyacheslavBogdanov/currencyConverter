@@ -8,18 +8,28 @@ export const Converter = ({ onConverting, result }) => {
 	const [sum, setSum] = useState(100);
 	const [currenciesCode, setСurrenciesCode] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
+	const [dateUpdate, setDateUpdate] = useState('');
 
 	useEffect(() => {
 		setIsLoading(true);
 		fetch('https://v6.exchangerate-api.com/v6/500eda8129cb286bbd60c0ad/latest/USD')
 			.then((response) => response.json())
-			.then((data) => setСurrenciesCode(Object.keys(data.conversion_rates)))
+			.then((data) => {
+				setСurrenciesCode(Object.keys(data.conversion_rates));
+				setDateUpdate(data.time_last_update_utc);
+			})
 			.finally(() => setIsLoading(false));
 	}, []);
 
 	return (
 		<div className={styles.converter}>
-			{isLoading && <div className={styles.loader}></div>}
+			{isLoading ? (
+				<div className={styles.loader}></div>
+			) : (
+				<div className={styles.update}>
+					Данные на {new Date(dateUpdate).toLocaleString()}
+				</div>
+			)}
 			<div className={styles.conversion}>
 				<div className={styles.title}>У меня есть</div>
 				<div className={styles.select}>
