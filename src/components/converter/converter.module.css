@@ -87,6 +87,28 @@
 	opacity: 0.6;
 }
 
+.loader {
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 12px;
+	height: 12px;
+	border: 3px solid #21212190;
+	border-radius: 50%;
+	border-left-color: transparent;
+	animation: loader 1s infinite;
+}
+
+@keyframes loader {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
 @media (max-width: 600px) {
 	.converter {
 		max-width: 100%;
